@@ -6,8 +6,7 @@ Welcome to my LeetCode solutions repository! This repository contains a collecti
 
 This repository is organized as follows:
 
-- **`/problems`**: Contains directories for each problem. Each directory typically includes:
-  - **`Solution.cpp`**: The C++ code solution for the problem.
+  - **`ProblemName.cpp`**: The C++ code solution for the problem.
   - **`README.md`**: Explanation of the approach and solution details.
 
 ## Getting Started
@@ -16,12 +15,12 @@ To use or review the solutions:
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/omsharma_004/leetcode.git
+    git clone https://github.com/omsharma_004/LeetCode.git
     ```
 
 2. **Navigate to a specific problem directory**:
     ```sh
-    cd leetcode/problems/ProblemName
+    cd leetcode/ProblemName
     ```
 
 3. **Compile and run the solution** using a C++ compiler. For example, with `g++`:
