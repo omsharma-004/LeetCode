@@ -16,7 +16,7 @@ To use or review the solutions:
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/omsharma_004/LeetCode.git
+    git clone https://github.com/omsharma-004/LeetCode.git
     ```
 
 2. **Navigate to a specific problem directory**:
@@ -27,7 +27,7 @@ To use or review the solutions:
 3. **Compile and run the solution** using a C++ compiler. For example, with `g++`:
     ```sh
     g++ ProblemName.cpp -o ProblemName
-    ./Solution
+    ./ProblemName
     ```
 
 ## Structure and Naming
@@ -51,6 +51,6 @@ This repository is licensed under the [MIT License](LICENSE). See the LICENSE fi
 If you have any questions or feedback, feel free to reach out:
 
 - **Email:** omsharma.2104@gmail.com
-- **GitHub:** [Om Sahrma](https://github.com/omsharma_004)
+- **GitHub:** [Om Sharma](https://github.com/omsharma-004)
 
 Happy coding and problem-solving!
