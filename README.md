@@ -6,6 +6,7 @@ Welcome to my LeetCode solutions repository! This repository contains a collecti
 
 This repository is organized as follows:
 
+- **`/ProblemName`**: Folder that contains:
   - **`ProblemName.cpp`**: The C++ code solution for the problem.
   - **`README.md`**: Explanation of the approach and solution details.
 
