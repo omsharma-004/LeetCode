@@ -11,16 +11,16 @@
  */
 class Solution {
 public:
-    int sum=0;
-    void treesum(TreeNode* root){
+    void treesum(TreeNode* root,int& sum){
         if(root==NULL) return;
-        treesum(root->right);
+        treesum(root->right,sum);
         root->val+=sum;
         sum=root->val;
-        treesum(root->left);
+        treesum(root->left,sum);
     }
     TreeNode* bstToGst(TreeNode* root) {
-        treesum(root);
+        int sum=0;
+        treesum(root,sum);
         return root;
     }
 };
