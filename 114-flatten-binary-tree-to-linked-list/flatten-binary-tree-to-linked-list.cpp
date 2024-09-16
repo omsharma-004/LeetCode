@@ -37,7 +37,7 @@
 //     }
 // };
 
-//Moriis 
+//Moriis algorithm Space complexity O(1)
 
 class Solution {
 public:
