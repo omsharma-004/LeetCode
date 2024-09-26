@@ -1,8 +1,8 @@
 class Solution {
 private:
     bool helper(TreeNode* p, TreeNode* q){
-        if(!p and !q) return true;
-        if(!p or !q) return false;
+        if(p==NULL && q==NULL) return true;
+        if(p==NULL || q==NULL) return false;
         return p->val==q->val && helper(p->left, q->right) && helper(p->right, q->left);
     }
 public:
