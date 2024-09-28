@@ -15,7 +15,6 @@ public:
         if (!head) return NULL;
         ListNode* mid = helper(head);
         ListNode* slow=head;
-        ListNode* fast=head;
         ListNode* prev=NULL;
         while(slow!=mid){
             prev=slow;
