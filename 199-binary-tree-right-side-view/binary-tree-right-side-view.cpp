@@ -35,9 +35,9 @@ public:
     }
     void pre(TreeNode* root, vector<int>& ans, int lvl){
         if(root==NULL) return;
-        ans[lvl]=root->val;
         pre(root->left, ans, lvl+1);
         pre(root->right, ans, lvl+1);
+        ans[lvl]=root->val;
     }
     vector<int> rightSideView(TreeNode* root) {
         vector<int> ans(levels(root),0);
