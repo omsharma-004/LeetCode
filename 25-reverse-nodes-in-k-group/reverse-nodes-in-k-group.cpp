@@ -13,6 +13,9 @@ ListNode* helper(ListNode* head, ListNode* tail) {
 }
 
 ListNode* reverseKGroup(ListNode* head, int k) {
+    ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
     if (head == NULL) return NULL;
     ListNode* tail = head;
     for (int i = 0; i < k; ++i) {
