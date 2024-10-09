@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<int> nextLargerNodes(ListNode* head) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         vector<int> vals;
         ListNode* slow=head;
         while(slow!=NULL){
