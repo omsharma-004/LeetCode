@@ -1,6 +1,9 @@
 class Solution {
 public:
     int maxWidthRamp(vector<int>& nums) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = nums.size();
         stack<int> indices;
         for (int i = 0; i < n; ++i) {
