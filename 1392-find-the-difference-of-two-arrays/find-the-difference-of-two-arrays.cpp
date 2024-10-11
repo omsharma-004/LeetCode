@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         vector<vector<int>> ans;
         unordered_set<int> mp1(nums1.begin(),nums1.end());
         unordered_set<int> mp2(nums2.begin(),nums2.end());
