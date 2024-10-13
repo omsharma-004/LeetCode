@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = 0;
         for (auto& v : nums) n += v.size();
         vector<pair<int, int>> t(n);
