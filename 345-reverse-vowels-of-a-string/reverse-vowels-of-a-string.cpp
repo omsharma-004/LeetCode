@@ -1,6 +1,9 @@
 class Solution {
  public:
   string reverseVowels(string s) {
+    ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
     int l = 0;
     int r = s.length() - 1;
 
