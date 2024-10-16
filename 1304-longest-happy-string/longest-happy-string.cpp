@@ -1,6 +1,9 @@
 class Solution {
 public:
     string longestDiverseString(int a, int b, int c) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         using pci = pair<char, int>;
         auto cmp = [](pci x, pci y) { return x.second < y.second; };
         priority_queue<pci, vector<pci>, decltype(cmp)> pq(cmp);
