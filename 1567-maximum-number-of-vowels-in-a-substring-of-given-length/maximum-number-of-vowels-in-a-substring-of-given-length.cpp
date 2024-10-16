@@ -3,13 +3,13 @@ public:
     int maxVowels(string s, int k) {
         int ans = 0;
         int mx = 0;
-        string v = "aeiou";
-        for(int i=0;i<s.size();i++){
-            if(v.find(s[i]) != string::npos) mx++;
-            if(i>=k){
-                if(v.find(s[i-k]) != string::npos) mx--;
+        unordered_set<char> s1={'a', 'e', 'i', 'o', 'u'};
+        for(int i=0;i< s.size();i++) {
+            if(s1.count(s[i])) mx++;
+            if (i>=k) {
+                if(s1.count(s[i-k])) mx--;
             }
-            ans=max(ans,mx);
+            ans=max(ans, mx);
         }
         return ans;
     }
