@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& astro) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         stack<int> st;
         vector<int> ans;
         for(auto i : astro){
