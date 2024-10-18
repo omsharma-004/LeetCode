@@ -1,6 +1,9 @@
 class Solution {
  public:
   int countMaxOrSubsets(vector<int>& nums) {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
     const int ors = accumulate(nums.begin(), nums.end(), 0, bit_or<>());
     int ans = 0;
     dfs(nums, 0, 0, ors, ans);
