@@ -1,11 +1,12 @@
 class Solution {
  public:
   bool parseBoolExpr(string expression) {
+    ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
     int i = 0;
     return parse(expression, i);
   }
-
- private:
   bool parse(const string& exp, int& i) {
     if (exp[i] == 't') {
       ++i;
