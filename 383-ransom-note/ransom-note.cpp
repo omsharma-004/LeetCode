@@ -1,6 +1,9 @@
 class Solution {
 public:
     bool canConstruct(string a, string b) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         unordered_map<char, int> mp1;
         unordered_map<char, int> mp2;
         for(auto i:a){
