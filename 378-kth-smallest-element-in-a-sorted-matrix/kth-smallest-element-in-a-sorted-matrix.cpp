@@ -6,7 +6,8 @@ public:
         cin.tie(0);
         cout.tie(0);
         priority_queue<pp, vector<pp>, greater<pp>> pq;
-        for(int i=0;i<matrix.size();i++){
+        int n=matrix.size();
+        for(int i=0;i<min(n,k);i++){
             pq.push({matrix[i][0],{i,0}});
         }
         pp  ans;
