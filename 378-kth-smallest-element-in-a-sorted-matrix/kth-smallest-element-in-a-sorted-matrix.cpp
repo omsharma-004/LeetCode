@@ -1,14 +1,15 @@
+#define pp pair<int, pair<int,int>>
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
         ios_base::sync_with_stdio(0);
         cin.tie(0);
         cout.tie(0);
-        priority_queue<pair<int, pair<int,int>>, vector<pair<int, pair<int,int>>>, greater<pair<int, pair<int,int>>>> pq;
+        priority_queue<pp, vector<pp>, greater<pp>> pq;
         for(int i=0;i<matrix.size();i++){
             pq.push({matrix[i][0],{i,0}});
         }
-        pair<int, pair<int,int>>  ans;
+        pp  ans;
         while(k-- and not pq.empty()){
             ans=pq.top();
             pq.pop();
