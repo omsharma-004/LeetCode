@@ -4,21 +4,15 @@ public:
         ios_base::sync_with_stdio(0);
         cin.tie(0);
         cout.tie(0);
-        sort(nums.begin(), nums.end());
-        int l=0;
-        int r=nums.size()-1;
+        unordered_map<int, int> mp;
         int count=0;
-        while(l<r){
-            if(nums[l]+nums[r]==k){
-                l++;
-                r--;
+        for(auto i:nums){
+            if(mp[k-i]>0){
                 count++;
-            }
-            else if(nums[l]+nums[r]<k){
-                l++;
+                mp[k-i]--;
             }
             else{
-                r--;
+                mp[i]++;
             }
         }
         return count;
