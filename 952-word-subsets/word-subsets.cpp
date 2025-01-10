@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         unordered_map<char, int> mp1;
         for (const string& word : words2) {
             unordered_map<char, int> mp2;
