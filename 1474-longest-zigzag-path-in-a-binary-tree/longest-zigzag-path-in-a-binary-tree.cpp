@@ -14,6 +14,9 @@ public:
         }
     }
     int longestZigZag(TreeNode* root) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         helper(root, 0, true);
         helper(root, 0, false);      
         return count;
