@@ -1,6 +1,9 @@
 class Solution {
 public:
     bool canConstruct(string s, int k) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         if (s.length() < k) return false;
         sort(s.begin(), s.end());
         int oddCount = 0;
