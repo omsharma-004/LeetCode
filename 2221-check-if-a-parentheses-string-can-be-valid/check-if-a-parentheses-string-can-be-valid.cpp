@@ -1,6 +1,9 @@
 class Solution {
 public:
     bool canBeValid(string s, string locked) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = s.length();
         if (n % 2 != 0) {
             return false;
