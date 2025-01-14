@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = A.size();
         unordered_map<int, int> m1, m2;
         for(int i = 0; i < n; i++) {
