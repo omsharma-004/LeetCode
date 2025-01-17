@@ -1,6 +1,9 @@
 class Solution {
 public:
     int romanToInt(string s) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int ans=0;
         unordered_map <char,int> mp{
         {'I',1},{'V',5},{'X',10},{'L',50},{'C',100},{'D',500},{'M',1000}};
