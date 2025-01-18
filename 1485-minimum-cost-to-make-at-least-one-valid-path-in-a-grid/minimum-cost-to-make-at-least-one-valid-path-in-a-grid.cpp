@@ -1,9 +1,11 @@
-using namespace std;
 const int dx[4] = {0, 0, 1, -1};
 const int dy[4] = {1, -1, 0, 0};
 class Solution {
 public:
     int minCost(vector<vector<int>>& grid) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int r = grid.size(), c = grid[0].size();
         vector<vector<int>> dist(r, vector<int>(c, INT_MAX));
         deque<pair<int, int>> dq;
