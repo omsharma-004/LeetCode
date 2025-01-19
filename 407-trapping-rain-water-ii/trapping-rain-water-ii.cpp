@@ -1,6 +1,9 @@
 class Solution {
 public:
     int trapRainWater(vector<vector<int>>& heightMap) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int m = heightMap.size() , n = heightMap[0].size();
         priority_queue<array<int,3> , vector<array<int,3>> , greater<array<int,3>>> q;
         vector<int> dic = {1,0,-1,0,1};
