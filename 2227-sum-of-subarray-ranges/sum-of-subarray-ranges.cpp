@@ -13,7 +13,7 @@ public:
             {
                 a=max(a,nums[j]);
                 b=min(b,nums[j]);
-                sum+=abs(b-a);
+                sum+=a-b;
             }
         }
         return sum;
