@@ -1,6 +1,9 @@
 class Solution {
 public:
     int equalSubstring(string s, string t, int maxCost) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n=s.length();
         vector<int> v(n);
         for (int i=0;i<n;i++){
