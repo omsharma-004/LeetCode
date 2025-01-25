@@ -1,6 +1,9 @@
 class Solution {
 public:
     int calculateMinimumHP(vector<vector<int>>& grid) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = grid.size();
         int m = grid[0].size();
         vector<vector<int>> dp(n, vector<int>(m, 0));
