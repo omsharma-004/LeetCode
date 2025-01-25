@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         vector<pair<int, int>> copy;
         for (int i = 0; i < nums.size(); i++) {
             copy.push_back({nums[i], i});
