@@ -1,56 +1,22 @@
-class Solution 
-{
-
-    bool helper(unordered_map<int , vector<int>>& graph , int& numCourses , int& start , int& end)
-    {
-        if(start == end) return true;
-
-        vector<int> visited(numCourses , 0);
-        queue<int> q;
-        q.push(start);
-        visited[start] = 1;
-        while(!q.empty())
-        {
-            int top = q.front();
-            q.pop();
-            if(top == end)
-            {
-                return true;
-            }
-            for(auto it : graph[top])
-            {
-                if(visited[it] == 0)
-                {
-                    visited[it] = 1;
-                    q.push(it);
+class Solution {
+public:
+    vector<bool> checkIfPrerequisite(int n, vector<vector<int>>& prerequisites, vector<vector<int>>& queries) {
+        bool f[n][n];
+        memset(f, false, sizeof(f));
+        for (auto& p : prerequisites) {
+            f[p[0]][p[1]] = true;
+        }
+        for (int k = 0; k < n; ++k) {
+            for (int i = 0; i < n; ++ i) {
+                for (int j = 0; j < n; ++ j) {
+                    f[i][j] |= (f[i][k] && f[k][j]);
                 }
             }
         }
-        return false;
-    }
-
-public:
-    vector<bool> checkIfPrerequisite(int numCourses, vector<vector<int>>& prerequisites, vector<vector<int>>& queries) 
-    {
-        ios_base::sync_with_stdio(0);
-        cin.tie(0);
-        cout.tie(0);
-        unordered_map<int , vector<int>> graph;
-        for(auto it : prerequisites)
-        {
-            int prev = it[0];
-            int next = it[1];
-            graph[prev].push_back(next);
+        vector<bool> ans;
+        for (auto& q : queries) {
+            ans.push_back(f[q[0]][q[1]]);
         }
-        vector<bool> res;
-
-        for(auto it : queries)
-        {
-            int start = it[0];
-            int end = it[1];
-            res.push_back(helper(graph , numCourses , start , end));
-        }
-
-        return res;
+        return ans;
     }
 };
