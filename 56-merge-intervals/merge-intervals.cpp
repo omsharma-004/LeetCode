@@ -1,18 +1,17 @@
-class Solution {
+ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        ios_base::sync_with_stdio(0);
-        cin.tie(0);
-        cout.tie(0);
-        vector<vector<int>> ans;
         sort(intervals.begin(), intervals.end());
-        for (auto it : intervals) {
-            if (ans.empty() || ans.back()[1] < it[0]) {
-                ans.push_back(it);
+        int k = 0; 
+        for (int i = 1; i < intervals.size(); i++) {
+            if (intervals[k][1] >= intervals[i][0]) { 
+                intervals[k][1] = max(intervals[k][1], intervals[i][1]);
             } else {
-                ans.back()[1] = max(it[1], ans.back()[1]);
+                k++; 
+                intervals[k] = intervals[i]; 
             }
         }
-        return ans;
+        intervals.resize(k + 1);
+        return intervals;
     }
 };
