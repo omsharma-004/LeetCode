@@ -1,6 +1,9 @@
 class Solution {
 public:
     int longestCommonSubsequence(string text1, string text2) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = text1.size();
         int m = text2.size();
         vector<vector<int>> lcs(n + 1, vector<int>(m + 1, 0));
