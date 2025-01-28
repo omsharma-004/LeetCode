@@ -26,6 +26,9 @@ public:
         return map[root] = profit;
     }
     int rob(TreeNode* root) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         map<TreeNode*, int> map;
         return solve(root, map);
     }
