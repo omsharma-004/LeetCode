@@ -1,17 +1,32 @@
 class Solution {
 public:
-    vector<int> travel(TreeNode* root) {
-        if (root == NULL)
-            return {0, 0};
-        vector<int> left = travel(root->left);
-        vector<int> right = travel(root->right);
-        vector<int> v(2);
-        v[0] = root->val + left[1] + right[1];
-        v[1] = max(left[0], left[1]) + max(right[0], right[1]);
-        return v;
+    int solve(TreeNode* root, map<TreeNode*, int>& map) {
+        if (root == nullptr) {
+            return 0;
+        }
+
+        if (map.find(root) != map.end()) {
+            return map[root];
+        }
+
+        int profit = 0;
+        if (root->left != nullptr) {
+            profit +=
+                solve(root->left->left, map) + solve(root->left->right, map);
+        }
+
+        if (root->right != nullptr) {
+            profit +=
+                solve(root->right->left, map) + solve(root->right->right, map);
+        }
+
+        profit = max(profit + root->val,
+                     solve(root->left, map) + solve(root->right, map));
+
+        return map[root] = profit;
     }
     int rob(TreeNode* root) {
-        vector<int> res = travel(root);
-        return max(res[0], res[1]);
+        map<TreeNode*, int> map;
+        return solve(root, map);
     }
 };
