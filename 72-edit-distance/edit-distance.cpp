@@ -1,6 +1,9 @@
 class Solution {
 public:
     int minDistance(string word1, string word2) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int m = word1.length();
         int n = word2.length();
         vector<vector<int>> dist(m + 1, vector<int>(n + 1));
