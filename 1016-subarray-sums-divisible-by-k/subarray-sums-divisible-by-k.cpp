@@ -1,22 +1,20 @@
 class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
-        ios_base::sync_with_stdio(0);
-        cin.tie(0);
-        cout.tie(0);
-        int n = nums.size();
         unordered_map<int, int> mp;
-        mp[0] = 1;
-        int prefixSum = 0;
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            prefixSum += nums[i];
-            int mod = ((prefixSum % k) + k) % k;
-            if (mp.find(mod) != mp.end()) {
-                count += mp[mod];
+        int ans = 0;
+        int sum = 0;
+        mp[0] = 0;
+        for (auto i : nums) {
+            sum += i;
+            int target = ((sum % k) + k) % k;
+            if (mp.find(target) != mp.end()) {
+                ans += mp[target] + 1;
+                mp[target]++;
+            } else {
+                mp[target] = 0;
             }
-            mp[mod]++;
         }
-        return count;
+        return ans;
     }
 };
