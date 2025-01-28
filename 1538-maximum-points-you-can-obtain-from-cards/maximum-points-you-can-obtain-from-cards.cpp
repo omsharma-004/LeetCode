@@ -1,15 +1,20 @@
 class Solution {
 public:
     int maxScore(vector<int>& arr, int k) {
-        int n = arr.size();
-        vector<int> v(n + 1, 0);
-        for (int i = 1; i <= n; i++) {
-            v[i] = v[i - 1] + arr[i - 1];
-        }
+        int left = 0;
+        int right = 0;
         int ans = 0;
-        for (int i = 0; i <= k; i++) {
-            int score = v[i] + (v[n] - v[n - (k - i)]);
-            ans = max(ans, score);
+        for (int i = 0; i < k; i++) {
+            left += arr[i];
+        }
+        ans = left;
+        int r = arr.size() - 1;
+        for (int i = k - 1; i >= 0; i--) {
+            left = left - arr[i];
+            right += arr[r];
+            r--;
+
+            ans = max(ans, left + right);
         }
         return ans;
     }
