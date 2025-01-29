@@ -3,6 +3,9 @@
 class Solution {
 public:
     int maxPerformance(int n, vector<int>& sp, vector<int>& eff, int k) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         vector<pair<int, int>> v;
         for (int i = 0; i < n; i++) {
             v.push_back({eff[i], sp[i]});
