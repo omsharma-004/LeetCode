@@ -5,9 +5,10 @@ public:
         cin.tie(0);
         cout.tie(0);
         sort(nums.begin(), nums.end());
-        for(int i=0;i<k;i++){
+        while(k>0){
             nums[0]=-nums[0];
             sort(nums.begin(), nums.end());
+            k--;
         }
         int sum=0;
         for(int i=0;i<nums.size();i++) sum+=nums[i];
