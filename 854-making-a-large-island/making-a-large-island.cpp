@@ -41,6 +41,9 @@ public:
         return result;
     }
     int color_component(vector<vector<int>>& g, vector<int> start, int color) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int result = 0, n = g.size();
         g[start[0]][start[1]] = color;
         queue<vector<int>> q;
