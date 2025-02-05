@@ -1,22 +1,27 @@
 class Solution {
 public:
     bool areAlmostEqual(string s1, string s2) {
-        int n = s1.length();
-        vector<int> diff;
-        for (int i = 0; i < n; i++) {
+        int notEqual1 = -1;
+        int notEqual2 = -1;
+
+        for (int i = 0; i < s1.size(); i++) {
             if (s1[i] != s2[i]) {
-                if (diff.size() == 2)
+                if (notEqual1 == -1) {
+                    notEqual1 = i;
+                } else if (notEqual2 == -1) {
+                    notEqual2 = i;
+                } else {
                     return false;
-                diff.push_back(i);
+
+                }
             }
         }
-        
-        if (diff.size() == 0)
+        if (notEqual1 == -1) {
             return true;
-        if (diff.size() == 1)
+        } else if (notEqual2 == -1) {
             return false;
-        if (s1[diff[0]] != s2[diff[1]] || s1[diff[1]] != s2[diff[0]])
-            return false;
-        return true;
+        } else {
+            return (s1[notEqual1] == s2[notEqual2]) && (s1[notEqual2] == s2[notEqual1]); 
+        }
     }
 };
