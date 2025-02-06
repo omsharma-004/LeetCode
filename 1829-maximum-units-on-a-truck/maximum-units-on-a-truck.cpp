@@ -4,6 +4,9 @@ bool cmp(vector<int>& a, vector<int>& b){
 class Solution {
 public:
     int maximumUnits(vector<vector<int>>& v, int k) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int res=0;
         sort(v.begin(), v.end(), cmp);
         for(int i=0;i<v.size();i++){
