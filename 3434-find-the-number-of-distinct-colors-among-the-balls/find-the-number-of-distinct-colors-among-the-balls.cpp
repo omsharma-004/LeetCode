@@ -1,29 +1,25 @@
 class Solution {
 public:
-    vector<int> queryResults(int lim, vector<vector<int>>& v) {
-        int n=v.size();
-        map<int,int>m; 
-        map<int,int>col;
-        map<int,bool>vis;
-        vector<int>ans;
-        for(int i=0;i<n;++i){
-            int x=v[i][0],y=v[i][1];
-            if(vis[x]){
-                if(m[col[x]]){
-                    m[col[x]]--;
-                    if(m[col[x]]==0)m.erase(col[x]); 
-                    cout<<"yahia"<<endl; 
-                }
-                m[y]++;
-                col[x]=y; 
-                ans.push_back(m.size());
-                continue;
+    vector<int> queryResults(int limit, vector<vector<int>>& queries) {
+        vector<int> answer(queries.size(), 0);
+        unordered_map<int, int> map;
+        unordered_map<int, int> colour;
+        int oldCol,newCol;
+
+        for (int i = 0; i < queries.size(); i++) {
+            oldCol = colour[queries[i][0]];
+            newCol =  queries[i][1];
+            if (oldCol == 0) {
+                colour[queries[i][0]] = newCol;
+                map[newCol]++;
+            } else {
+                if (--map[oldCol] == 0)
+                    map.erase(oldCol);
+                map[newCol]++;
+                colour[queries[i][0]] = newCol;
             }
-            m[y]++;
-            vis[x]=true;
-            col[x]=y;
-            ans.push_back(m.size());
+                answer[i] = map.size();
         }
-        return ans; 
+        return answer;
     }
 };
