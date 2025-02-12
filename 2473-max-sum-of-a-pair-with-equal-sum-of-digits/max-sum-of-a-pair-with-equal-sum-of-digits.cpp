@@ -1,26 +1,24 @@
 class Solution {
 public:
     int maximumSum(vector<int>& nums) {
-        unordered_map<int, priority_queue<int>> mp;
-        for (int i = 0; i < nums.size(); i++) {
-            int sum = 0;
-            int n = nums[i];
-            while (n > 0) {
-                int last = n % 10;
-                sum += last;
-                n = n / 10;
+        unordered_map<int, int> mp;
+        int ans = -1;
+        for (int i : nums) {
+            int dsum = 0;
+            int num = i;
+            while (num > 0) {
+                dsum += num % 10;
+                num = num / 10;
             }
-            mp[sum].push(nums[i]);
-        }
-        int maxi = -1;
-        for (auto it : mp) {
-            if (it.second.size() >= 2) {
-                int last = it.second.top();
-                it.second.pop();
-                int secondLast = it.second.top();
-                maxi = max(maxi, last + secondLast);
+            if (mp.find(dsum) != mp.end()) {
+                ans = max(ans, mp[dsum] + i);
+                if (i > mp[dsum]) {
+                    mp[dsum] = i;
+                }
+                continue;
             }
+            mp[dsum] = i;
         }
-        return maxi;
+        return ans;
     }
 };
