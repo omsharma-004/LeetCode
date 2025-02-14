@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<vector<int>> findMatrix(vector<int>& nums) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         unordered_map<int, int> m;
         int maxfreq = INT_MIN;
         for(auto n:nums){
