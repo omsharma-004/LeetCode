@@ -1,21 +1,21 @@
 class Solution {
 public:
     vector<vector<int>> findMatrix(vector<int>& nums) {
-        unordered_map<int,int> fr;
-        for(auto i:nums){
-            fr[i]++;
+        unordered_map<int, int> m;
+        int maxfreq = INT_MIN;
+        for(auto n:nums){
+            m[n]++;
+            maxfreq = max(maxfreq, m[n]);
         }
-        int size = 0;
-        
-        for(auto i:fr) size = max(size,i.second);
-        
-        vector<vector<int>> res(size); 
-        
-        for(auto i:fr){
-            for(int j = 0;j<i.second;j++){
-                res[j].push_back(i.first);
+        vector<vector<int>> ans(maxfreq);
+        for(auto c:m){
+            int num=c.first;
+            int freq=c.second;
+            while(freq){
+                ans[--freq].push_back(num);
             }
         }
-        return res;
+        return ans;
+
     }
 };
