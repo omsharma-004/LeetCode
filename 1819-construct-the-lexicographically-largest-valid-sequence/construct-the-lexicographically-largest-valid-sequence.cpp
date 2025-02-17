@@ -1,54 +1,50 @@
 class Solution {
 public:
-    vector<int> ans;
-    int flag = 0;
-    void solve(vector<int>& v, int idx, int hash) {
-        if (hash == 0) {
-
-            ans = v;
-            flag = 1;
+    void solve(int index, vector<int>& arr, map<int,bool>& m,int n,bool& found){
+        if(index==arr.size()){ //we reach the end ...all numbers    placed
+            found = true;
             return;
         }
-        if (flag == 1)
-            return;
-        cout << v[idx] << endl;
-        if (v[idx] != 0) {
-            solve(v, idx + 1, hash);
+        if(arr[index]!=-1){ //No space at this index...move ahead
+            solve(index+1,arr,m,n,found);
             return;
         }
-
-        for (int i = 19; i > 0; i--) {
-            if (((1 << i) & (hash))) {
-
-                if (idx + i + 1 < v.size() && v[idx + i + 1] == 0) {
-                    
-                    v[idx] = i + 1;
-                    v[idx + i + 1] = i + 1;
-
-                    hash = (hash & ~(1 << (i)));
-                    solve(v, idx + 1, hash);
-                    hash = hash | (1 << i);
-                    v[idx] = 0;
-                    v[idx + i + 1] = 0;
+        // the index is vacant
+        for(int i=n; i>=1; i--){ 
+            if(m[i]==false){ //To check whether we have placed this number before or not
+                if(i!=1 && (index+i)<arr.size() && arr[index+i]==-1){
+                    arr[index]=arr[index+i]=i;
+                    m[i]= true;
+                    solve(index+1,arr,m,n,found);
+                    if(found==true){ //EARLY STOPPING ... the catch!
+                        return;  
+                    }
+                    arr[index]=arr[index+i]=-1; //backtrack
                 }
+                else if(i==1){
+                    arr[index] = 1;
+                    m[i]= true;
+                    solve(index+1,arr,m,n,found);
+                    if(found==true){ //EARLY STOPPING.... the catch
+                        return;
+                    }
+                    arr[index] = -1; //backtrack
+                }
+                m[i] = false; //backtrack
             }
         }
-
-        if ((hash & (1))) {
-            v[idx] = 1;
-            hash = (hash & ~(1 << (0)));
-            solve(v, idx + 1, hash);
-            hash = hash | (1 << 0);
-            v[idx] = 0;
-        }
+        return;
     }
     vector<int> constructDistancedSequence(int n) {
-        vector<int> v(2 * n - 1, 0);
-        int hash = 0;
-        for (int i = 0; i < n; i++) {
-            hash = hash | (1 << i);
+        int arrSize = 2*n-1; // figure this out!
+        vector<int>arr(arrSize,-1);
+        map<int,bool>m;
+        for(int i = 1; i<=n; i++){
+            m.insert({i,false});
         }
-        solve(v, 0, hash);
-        return ans;
+        int index = 0;
+        bool found = false; // a flag variable we use for early stopping
+        solve(index,arr,m,n,found);
+        return arr;
     }
 };
