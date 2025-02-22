@@ -11,35 +11,28 @@
  */
 class Solution {
 public:
-int id = 0;
-TreeNode* helper(string traversal, int depth){
-    if(id == traversal.size()) return NULL;
-
-    int idx = id;
-    int cnt = 0;
-    while(idx < traversal.size() && traversal[idx] == '-'){
-        cnt++;
-        idx++;
-    }
-    
-    if(cnt != depth) return NULL;
-
-    string temp = "";
-    while(idx < traversal.size() && traversal[idx] != '-'){
-        temp += traversal[idx];
-        idx++;
-    }
-
-    id = idx;
-    TreeNode *root = new TreeNode(stoi(temp));
-
-    root->left = helper(traversal, depth + 1);
-    root->right = helper(traversal, depth + 1);
-
-    return root;
-}
-
     TreeNode* recoverFromPreorder(string traversal) {
-        return helper(traversal, 0);
+        vector<TreeNode*> stack;
+        int i = 0;
+        while(i < traversal.length()) {
+            int level = 0, val = 0;
+            while(traversal[i] == '-') {
+                i++;
+                level++;
+            }
+            while(i < traversal.length() && traversal[i] != '-') {
+                val = val*10 + traversal[i] - '0';
+                i++;
+            }
+
+            TreeNode* node = new TreeNode(val);
+            while(stack.size() > level) stack.pop_back();
+            if(!stack.empty()) {
+                if(!stack.back()->left) stack.back()->left = node;
+                else stack.back()->right = node;
+            }
+            stack.push_back(node);
+        }
+        return stack[0];
     }
 };
