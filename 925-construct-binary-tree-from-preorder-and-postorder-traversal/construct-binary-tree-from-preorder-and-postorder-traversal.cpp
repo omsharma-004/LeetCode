@@ -1,37 +1,32 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
- * };
- */
 class Solution {
-public:
-    TreeNode* helper(vector<int>& preorder, vector<int>& postorder, int& a, int& b) {
-        if (a >= preorder.size() || b >= postorder.size())
-            return NULL;
-        TreeNode* temp = new TreeNode(preorder[a]);
-        a += 1;
-        if (temp->val == postorder[b]) {
-            b += 1;
-            return temp;
-        }
-        temp->left = helper(preorder, postorder, a, b);
-        if (temp->val == postorder[b]) {
-            b += 1;
-            return temp;
-        }
-        temp->right = helper(preorder, postorder, a, b);
-        b += 1;
-        return temp;
+private:
+    TreeNode* helper(vector<int>& pre, vector<int>& post, int preStart,
+                     int postStart, int length,
+                     unordered_map<int, int>& postIndexMap) {
+        if (length == 0)
+            return nullptr;
+        TreeNode* root = new TreeNode(pre[preStart]);
+        if (length == 1)
+            return root;
+        int leftChildValue = pre[preStart + 1];
+        int leftChildIndexInPost = postIndexMap[leftChildValue];
+        int leftSubtreeSize = leftChildIndexInPost - postStart + 1;
+        root->left = helper(pre, post, preStart + 1, postStart, leftSubtreeSize,
+                            postIndexMap);
+        root->right = helper(pre, post, preStart + 1 + leftSubtreeSize,
+                             postStart + leftSubtreeSize,
+                             length - 1 - leftSubtreeSize, postIndexMap);
+
+        return root;
     }
-    TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
-        int a = 0, b = 0;
-        return helper(preorder, postorder, a, b);
+
+public:
+    TreeNode* constructFromPrePost(vector<int>& preorder,
+                                   vector<int>& postorder) {
+        unordered_map<int, int> postIndexMap;
+        for (int i = 0; i < postorder.size(); i++) {
+            postIndexMap[postorder[i]] = i;
+        }
+        return helper(preorder, postorder, 0, 0, preorder.size(), postIndexMap);
     }
 };
