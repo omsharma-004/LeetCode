@@ -1,6 +1,9 @@
 class Solution {
 public:
     string repeatLimitedString(string s, int k) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         unordered_map<char, int> mp;
         for(auto i:s){
             mp[i]++;
