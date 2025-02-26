@@ -1,21 +1,24 @@
 class Solution {
 public:
-    int maxAbsoluteSum(vector<int>& nums) {
-        int one=0,temp_one=0;
-        for(auto &x:nums){
-            temp_one+=x;
-            if(temp_one<0) temp_one=0;
-            // cout<<temp_one<<" ";
-            one=max(one,temp_one);
-            // cout<<one<<endl;
+    int maxAbsoluteSum(vector<int>& nums) 
+    {
+        int possum = INT_MIN, negsum = INT_MAX;
+        int curpos = 0, curneg = 0;
+        
+        for(int n : nums)
+        {
+            curpos += n;
+            curneg += n;
+            
+            possum = max(possum, curpos);
+            negsum = min(negsum, curneg);
+            
+            if (curpos < 0)
+                curpos = 0;
+            if (curneg > 0)
+                curneg = 0;
         }
-        for(auto &x:nums) x*=-1;
-         int two=0,temp_two=0;
-        for(auto &x:nums){
-            temp_two+=x;
-            if(temp_two<0) temp_two=0;
-            two=max(two,temp_two);
-        }
-        return max(one,two);
+        
+        return max(possum, -negsum);
     }
 };
