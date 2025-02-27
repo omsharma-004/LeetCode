@@ -1,26 +1,20 @@
 class Solution {
 public:
     int lenLongestFibSubseq(vector<int>& arr) {
-        int n = arr.size();
-        int maxLen = 0;
+        unordered_set<int>s(arr.begin(), arr.end());
+        int n = arr.size(), result = 0;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                int curLen = 0,ind = j;
-                int first = arr[i], second = arr[j];
-                while (ind != n) {
-                    ind = lower_bound(arr.begin() + ind + 1, arr.end(),first + second) - arr.begin();
-                    if(ind < n && arr[ind] == first + second){
-                        first = second;
-                        second = arr[ind];
-                        curLen++;
-                    }else
-                    {
-                        break;
-                    }
+                int first = arr[i], second = arr[j], length = 2, aux;
+                while (s.count(first + second)) {
+                    aux = second;
+                    second = first + second;
+                    first = aux;
+                    length++;
                 }
-                maxLen = max(maxLen, curLen);
-            }
+                result = max(result, length);
+            }         
         }
-        return (maxLen == 0 ? 0 : maxLen + 2);
+        return result < 3 ? 0 : result;
     }
 };
