@@ -1,6 +1,9 @@
 class Solution {
 public:
     string shortestCommonSupersequence(string str1, string str2) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = str1.size();
         int m = str2.size();
         
