@@ -1,31 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
-        vector<vector<int>> result;
-        int n = nums1.size();
-        int m = nums2.size();
-        int i = 0 ;
-        int j = 0;
-        while(i < n && j < m ){
-            if(nums1[i][0] == nums2[j][0]){
-                result.push_back({nums1[i][0], nums1[i][1]+nums2[j][1]});
-                i++;j++;
-            }else if(nums1[i][0] < nums2[j][0]){
-                result.push_back(nums1[i]);
-                i++;
-            }else{
-                result.push_back(nums2[j]);
-                j++;
+        int left = 0, right = 0;
+        vector<vector<int>> res;
+        
+        while (left < nums1.size() && right < nums2.size()){
+            if (nums1[left][0] == nums2[right][0]){
+                res.push_back({nums1[left][0], nums1[left][1] + nums2[right][1]});
+                left++;
+                right++;
+            } else if (nums1[left][0] < nums2[right][0]){
+                res.push_back(nums1[left]);
+                left++;
+            } else {
+                res.push_back(nums2[right]);
+                right++;
             }
         }
-        while(i < n){
-            result.push_back(nums1[i]);
-            i++;
+        while (left < nums1.size()){
+            res.push_back(nums1[left]);
+            left++;
         }
-        while(j < m){
-            result.push_back(nums2[j]);
-            j++;
+        while (right < nums2.size()){
+            res.push_back(nums2[right]);
+            right++;
         }
-        return result;
+        return res;
     }
 };
