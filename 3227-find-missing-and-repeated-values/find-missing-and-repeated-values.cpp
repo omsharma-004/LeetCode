@@ -1,22 +1,21 @@
 class Solution {
 public:
     vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
-        int n=grid.size();
-        vector<int>temp(n*n+1,0);
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                temp[grid[i][j]]++;
-            }
+        int n = grid.size();
+        int N = n * n;
+        unordered_map<int, int> mp;
+
+        for (auto &vec : grid) {
+            for (int &i : vec) mp[i]++;
         }
-        int a=0,b=0;
-        for(int i=1;i<=n*n;i++){
-            if(temp[i]==2){
-               a=i;
-            }
-            else if(temp[i]==0){
-                b=i;
-            }
+
+        int x = -1, y = -1;
+        for (int num = 1; num <= N; num++) {
+            if (!mp.count(num)) x = num;  // Missing number
+            else if (mp[num] > 1) y = num;  // Repeated number
+            if (x != -1 && y != -1) break;
         }
-        return {a,b};
+
+        return {y, x};
     }
 };
