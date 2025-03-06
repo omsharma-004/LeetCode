@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = grid.size();
         int N = n * n;
         unordered_map<int, int> mp;
