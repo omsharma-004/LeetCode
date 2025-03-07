@@ -14,6 +14,9 @@ vector<bool> helper(int right){
         return isPrime;
     }
     vector<int> closestPrimes(int left, int right) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         vector<bool> isPrime = helper(right);
         vector<int> prime;
 
