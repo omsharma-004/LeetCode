@@ -1,6 +1,9 @@
 class Solution {
 public:
     int longestPalindromeSubseq(string s) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = s.size();
         vector<vector<int>> dp(n, vector<int>(n, 0));
         for (int i = n - 1; i >= 0; i--) {
