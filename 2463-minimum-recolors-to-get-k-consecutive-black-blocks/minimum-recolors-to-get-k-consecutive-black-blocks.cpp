@@ -1,15 +1,16 @@
 class Solution {
 public:
-    int minimumRecolors(string blocks, int k) {
-        
-        int countB = 0;
-        int ans = numeric_limits<int>::max();
-        for(int i = 0; i < blocks.length(); i++)
-        {
-            if(i - k >= 0 && blocks[i-k] == 'B') countB--;
-            if(blocks[i] == 'B') countB++;
-            ans = min(ans, k - countB);
+    int minimumRecolors(string str, int length) {
+        const int n = str.size();
+        int count = 0;
+        for (int i = 0; i < length; ++i)
+            count += str[i] == 'W';
+        int mincount = count;
+        for (int i = length; i < n; ++i) {
+            count += str[i] == 'W';
+            count -= str[i - length] == 'W';
+            mincount = min(mincount, count);
         }
-        return ans;
+        return mincount;
     }
 };
