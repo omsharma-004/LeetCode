@@ -1,5 +1,5 @@
 bool cmp(vector<int>& a, vector<int>& b){
-    return a[1]<b[1];
+    return a[0]<b[0];
 }
 class Solution {
 public:
@@ -10,10 +10,10 @@ public:
         vector<vector<int>> ans;
         sort(arr.begin(), arr.end(), cmp);
         int n=arr.size();
-        ans.push_back(arr[n-1]);
-        for(int i=n-2;i>=0;i--){
+        ans.push_back(arr[0]);
+        for(int i=1;i<n;i++){
             vector<int> curr=arr[i];
-            if(curr[1]>=ans[ans.size()-1][0]){
+            if(curr[0]<=ans[ans.size()-1][1]){
                 ans[ans.size()-1][0]=min(curr[0],ans[ans.size()-1][0]);
                 ans[ans.size()-1][1]=max(curr[1],ans[ans.size()-1][1]);
             }
