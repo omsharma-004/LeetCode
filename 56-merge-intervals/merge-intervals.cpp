@@ -1,20 +1,23 @@
- class Solution {
+bool cmp(vector<int>& a, vector<int>& b){
+    return a[1]<b[1];
+}
+class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        ios_base::sync_with_stdio(0);
-        cin.tie(0);
-        cout.tie(0);
-        sort(intervals.begin(), intervals.end());
-        int k = 0; 
-        for (int i = 1; i < intervals.size(); i++) {
-            if (intervals[k][1] >= intervals[i][0]) { 
-                intervals[k][1] = max(intervals[k][1], intervals[i][1]);
-            } else {
-                k++; 
-                intervals[k] = intervals[i]; 
+    vector<vector<int>> merge(vector<vector<int>>& arr) {
+        vector<vector<int>> ans;
+        sort(arr.begin(), arr.end(), cmp);
+        int n=arr.size();
+        ans.push_back(arr[n-1]);
+        for(int i=n-2;i>=0;i--){
+            vector<int> curr=arr[i];
+            if(curr[1]>=ans[ans.size()-1][0]){
+                ans[ans.size()-1][0]=min(curr[0],ans[ans.size()-1][0]);
+                ans[ans.size()-1][1]=max(curr[1],ans[ans.size()-1][1]);
+            }
+            else{
+                ans.push_back(arr[i]);
             }
         }
-        intervals.resize(k + 1);
-        return intervals;
+        return ans;
     }
 };
