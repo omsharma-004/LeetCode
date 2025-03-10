@@ -1,28 +1,15 @@
 class Solution {
 public:
-    int minDistance(string word1, string word2) {
-        ios_base::sync_with_stdio(0);
-        cin.tie(0);
-        cout.tie(0);
-        int m = word1.length();
-        int n = word2.length();
-        vector<vector<int>> dist(m + 1, vector<int>(n + 1));
-        for (int i = 0; i <= m; i++) {
-            dist[i][0] = i;
-        }
-        for (int j = 0; j <= n; j++) {
-            dist[0][j] = j;
-        }
+    int minDistance(string s1, string s2) {
+        int m = s1.size(), n = s2.size();
+        vector<int> prev(n + 1), curr(n + 1);
+        iota(prev.begin(), prev.end(), 0);
         for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                if (word1[i - 1] == word2[j - 1]) {
-                    dist[i][j] = dist[i - 1][j - 1];
-                } else {
-                    dist[i][j] = 1 + min({dist[i - 1][j], dist[i][j - 1],
-                                          dist[i - 1][j - 1]});
-                }
-            }
+            curr[0] = i;
+            for (int j = 1; j <= n; j++)
+                curr[j] = s1[i-1] == s2[j-1] ? prev[j-1] : 1 + min({prev[j-1], prev[j], curr[j-1]});
+            swap(prev, curr);
         }
-        return dist[m][n];
+        return prev[n];
     }
 };
