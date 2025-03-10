@@ -1,6 +1,9 @@
 class Solution {
 public:
     long long helper(string word, int k) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         int n = word.size();
         int l = 0;
         int cons = 0;
