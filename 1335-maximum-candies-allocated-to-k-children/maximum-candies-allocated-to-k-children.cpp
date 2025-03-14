@@ -9,6 +9,9 @@ public:
     }
 
     int maximumCandies(vector<int>& can, long long k) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         long long total = 0;
         int n = can.size();
         for (auto c : can) {
