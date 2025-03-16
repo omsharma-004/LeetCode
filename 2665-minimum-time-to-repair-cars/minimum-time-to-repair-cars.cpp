@@ -1,25 +1,26 @@
 class Solution {
 public:
-    bool isPossibleToDoAllCars(vector<int>& ranks, int cars, long long maxTime) {
-        for(int rank : ranks) {
-            int carAllotment = floor(sqrt(maxTime / rank));
-            cars -= carAllotment;
-            if(cars <= 0) return true;
+    bool helper(vector<int>& ranks, long long& limit, int& cars) {
+        long long count = 0;
+        for (int& i : ranks) {
+            count += sqrt(limit / i);
         }
-        return false;
+        return count >= cars;
     }
-
     long long repairCars(vector<int>& ranks, int cars) {
-        int maxElem = *max_element(ranks.begin(), ranks.end());
-        long long start = 1, end = (long long)maxElem * cars * cars;
-        while(start <= end) {
-            long long mid = (start + end) / 2;
-            if(isPossibleToDoAllCars(ranks, cars, mid)) {
-                end = mid - 1;
+        int minr = *min_element(ranks.begin(), ranks.end());
+        long long lo = 1;
+        long long hi = 1LL * minr * cars * cars;
+        long long ans = hi, mid;
+        while (lo <= hi) {
+            mid = (lo + hi) / 2;
+            if (helper(ranks, mid, cars)) {
+                ans = mid;
+                hi = mid - 1;
             } else {
-                start = mid + 1;
+                lo = mid + 1;
             }
         }
-        return start;
+        return ans;
     }
 };
