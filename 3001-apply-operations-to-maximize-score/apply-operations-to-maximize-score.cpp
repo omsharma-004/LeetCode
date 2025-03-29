@@ -1,109 +1,90 @@
-#include <vector>
-#include <stack>
-#include <queue>
-#include <algorithm> // for std::max
-
-using namespace std;
-
 class Solution {
-private:
-    int countDistinctPrimeFactors(int n) {
-        int count = 0;
-
-        // Check for factor 2
-        if (n % 2 == 0) {
-            count++;
-            while (n % 2 == 0) {
-                n /= 2;
-            }
-        }
-
-        // Check for odd factors
-        for (long long i = 3; i * i <= n; i += 2) {
-            if (n % i == 0) {
-                count++;
-                while (n % i == 0) {
-                    n /= i;
-                }
-            }
-        }
-
-        // If remaining n is a prime
-        if (n > 1) count++;
-        return count;
-    }
-
-    int modPow(int base, int exp, int mod) {
-        long long result = 1;
-        long long b = base % mod;
-        while (exp > 0) {
-            if (exp & 1) {
-                result = (result * b) % mod;
-            }
-            b = (b * b) % mod;
-            exp >>= 1;
-        }
-        return (int)result;
-    }
-
 public:
-    int maximumScore(vector<int>& nums, int k) {
-        int n = (int)nums.size();
-        if (n == 0) return 1;
+    const int MOD = 1e9 +7;
 
-        // Priority queue to store (value, index) of nums
-        priority_queue<pair<int,int>> maxValues;
-        // 'rightLarge' tracks for each index i, where the "next larger element" is
-        vector<int> rightLarge(n, n);
-        // 'LeftLarge' will track for each index i, where the "previous larger element" is
-        vector<int> LeftLarge(n, -1);
+    long long binaryexp(long long base ,long long exp){
+        if(base ==0 || base==1)return base;
 
-        // We'll use two stacks of indices
-        stack<int> st;
-        stack<int> reverse;
+        long long ans = 1;
 
-        // Also store primeScores for each element
-        vector<int> primeScores(n, 0);
-
-        for (int i = 0; i < n; i++) {
-            primeScores[i] = countDistinctPrimeFactors(nums[i]);
-            maxValues.emplace(nums[i], i);
-
-        }
-
-        for (int i = 0; i < n; i++) {
-            while (!st.empty() && primeScores[i] > primeScores[st.top()]) {   
-                rightLarge[st.top()] = i;
-                st.pop();
+        while(exp>0){
+            if(exp%2==0){
+                base = (base*base)%MOD;
+                exp/=2;
+            }else{
+                ans = (ans*base)%MOD;
+                exp--;
             }
-            st.push(i); 
         }
+        return ans;
+    }
 
-        for (int i = n - 1; i >= 0; i--) {
-            while (!reverse.empty() && primeScores[i] >= primeScores[reverse.top()]) { 
-                LeftLarge[reverse.top()] = i;
-                reverse.pop();
+    void calculate_score(vector<long long>&score , vector<int>nums){
+
+        for(long long ele:nums){
+            int count =0;
+            for(long long i=2;i*i<ele;i++){
+                if(ele%i==0){
+                    count++;
+                }while(ele%i==0)ele/=i;
             }
-            reverse.push(i);                                   
+            if(ele>1)count++;
+            score.push_back(count);
         }
+    }
 
-        int score = 1;
-        const int MODULE = 1000000007;
+    void cal_subcount(vector<long long>& score, vector<long long>& subarray_count) {
+    int n = score.size();
+    vector<long long> res(n, -1);  // Initialize `res` with -1
 
-        // Pop the (value, index) pairs in descending order
-        while (!maxValues.empty() && k > 0) {
-            auto [val, idx] = maxValues.top();
-            maxValues.pop();
+    stack<int> st;
+    for (int i = 0; i < n; i++) {
+        while (!st.empty() && score[st.top()] < score[i])
+            st.pop();
 
-            // 't' is how many positions we can "use" from idx's span
-            long long t = 1LL * (rightLarge[idx] - idx) * (idx - LeftLarge[idx]);
-            long long steps = min(t, (long long)k);
+        if (!st.empty()) res[i] = st.top();
 
-            int multiply = modPow(val, (int)steps, MODULE);
-            score = (int)((1LL * score * multiply) % MODULE);
+        st.push(i);
+    }
 
-            k -= steps;
+    st = stack<int>();  // Clear stack
+
+    long long count;
+    for (int i = n - 1; i >= 0; --i) {
+        count = 0;
+        while (!st.empty() and score[st.top()] <= score[i])
+            st.pop();
+        if (st.empty())
+            count = (n - i) * (i - (res[i] == -1 ? -1 : res[i]));
+        else
+            count = (st.top() - i) * (i - (res[i] == -1 ? -1 : res[i]));
+
+        st.push(i);
+        subarray_count[i] = count;
+    }
+}
+
+
+    int maximumScore(vector<int>& nums,long long k) {
+        int n = nums.size();
+        vector<long long>score;
+        calculate_score(score,nums);
+
+        vector<long long>subarray_count(n);
+        cal_subcount(score,subarray_count);
+
+        priority_queue<pair<long long ,int>>pq;
+        for(int i=0;i<n;i++)
+        pq.push({nums[i],i});
+
+        long long ans = 1;
+        while(k>0){
+            long long curr = pq.top().first;
+            int curr_idx = pq.top().second;
+            pq.pop();
+            ans = (ans*binaryexp(curr,min(k,subarray_count[curr_idx])))%MOD;
+            k = k-subarray_count[curr_idx];
         }
-        return score % MODULE;
+        return ans;
     }
 };
